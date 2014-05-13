@@ -1,5 +1,39 @@
 class DoubleDice
 
+  class Matrix < Struct.new(:cleartext, :password)
+
+    def to_a
+      matrix = [password]
+      matrix << index_line
+
+      line = []
+      cleartext.each do |char|
+        if line.size < password.size
+          line << char
+        else
+          matrix << line
+          line = [char]
+        end
+      end
+      last_line = fill_last_line(line)
+      matrix << last_line unless last_line.empty?
+      matrix
+    end
+
+    private
+
+    def fill_last_line(line)
+      (password.size - line.size).times do
+        line << '_'
+      end
+      line
+    end
+
+    def index_line
+      password.map{|char| ('A'..'Z').to_a.index(char) }.map(&:to_s)
+    end
+  end
+
   attr_reader :cleartext, :password
 
   def initialize(cleartext, password)
@@ -8,33 +42,9 @@ class DoubleDice
   end
 
   def matrix
-    matrix = [password]
-    matrix << index_line
-
-    line = []
-    cleartext.each do |char|
-      if line.size < password.size
-        line << char
-      else
-        matrix << line
-        line = [char]
-      end
-    end
-    last_line = fill_last_line(line)
-    matrix << last_line unless last_line.empty?
-    matrix
+    Matrix.new(cleartext, password).to_a
   end
 
-  def fill_last_line(line)
-    (password.size - line.size).times do
-      line << '_'
-    end
-    line
-  end
-
-  def index_line
-    password.map{|char| ('A'..'Z').to_a.index(char) }.map(&:to_s)
-  end
 
 end
 
