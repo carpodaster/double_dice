@@ -20,8 +20,16 @@ class DoubleDice
         line = [char]
       end
     end
-    matrix << line if line.any? && line.size < password.size
+    last_line = fill_last_line(line)
+    matrix << last_line unless last_line.empty?
     matrix
+  end
+
+  def fill_last_line(line)
+    (password.size - line.size).times do
+      line << '_'
+    end
+    line
   end
 
   def index_line
