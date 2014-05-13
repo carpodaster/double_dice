@@ -19,6 +19,7 @@ class DoubleDice
         line = [char]
       end
     end
+    matrix << line if line.any? && line.size < password.size
     matrix
   end
 
