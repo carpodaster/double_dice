@@ -9,6 +9,7 @@ class DoubleDice
 
   def matrix
     matrix = [password]
+    matrix << index_line
 
     line = []
     cleartext.each do |char|
@@ -23,8 +24,8 @@ class DoubleDice
     matrix
   end
 
-  def index_of(char)
-    ('A'..'Z').to_a.index(char)
+  def index_line
+    password.map{|char| ('A'..'Z').to_a.index(char) }.map(&:to_s)
   end
 
 end
