@@ -1,4 +1,4 @@
-class DoubleDice
+module DoubleDice
   class Matrix
 
     attr_reader :cleartext, :password

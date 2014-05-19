@@ -1,6 +1,6 @@
 require 'matrix'
 
-class DoubleDice
+module DoubleDice
 
   class PasswordVector < Struct.new(:password)
     def to_a
@@ -22,18 +22,19 @@ class DoubleDice
 
   end
 
-  attr_reader :cleartext, :password
+  class Input # TODO rename me
 
-  def initialize(cleartext, password)
-    @cleartext = cleartext.upcase.strip.split(//).select{|c| /[A-Z]/ =~ c}
-    @password  = password.upcase.strip.gsub(/\s/, '').split(//)
+    attr_reader :cleartext, :password
+
+    def initialize(cleartext, password)
+      @cleartext = cleartext.upcase.strip.split(//).select{|c| /[A-Z]/ =~ c}
+      @password  = password.upcase.strip.gsub(/\s/, '').split(//)
+    end
+
+    def matrix
+      DoubleDice::Matrix.new(cleartext, password)
+    end
   end
-
-  def matrix
-    Matrix.new(cleartext, password)
-  end
-
-
 end
 
 slipsum = <<EOSLIPSUM
@@ -55,7 +56,7 @@ EOMIDDLEEARTH
 
 # ddice = DoubleDice.new text, pass
 # ddice = DoubleDice.new slipsum, 'foobar'
-ddice = DoubleDice.new one_ring, 'foobar'
+ddice = DoubleDice::Input.new one_ring, 'foobar'
 
 puts ddice.cleartext.inspect
 puts
