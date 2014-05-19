@@ -1,3 +1,4 @@
+$:.unshift '.'
 require 'matrix'
 
 module DoubleDice
