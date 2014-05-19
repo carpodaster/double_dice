@@ -29,7 +29,7 @@ module DoubleDice
       matrix = to_a
       matrix.unshift index_line
       matrix.unshift Array(password)
-      matrix.map(&:inspect)
+      matrix.map(&:inspect).join("\n")
     end
 
     private

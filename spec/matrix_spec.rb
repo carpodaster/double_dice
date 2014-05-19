@@ -69,7 +69,7 @@ describe DoubleDice::Matrix do
         password_index_line(password),
         %w(H E L L O W),
         %w(O R L D _ _)
-      ].map(&:inspect)
+      ].map(&:inspect).join("\n")
       subject.to_s.must_equal expected
     end
 

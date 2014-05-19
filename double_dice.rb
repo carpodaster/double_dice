@@ -61,7 +61,7 @@ ddice = DoubleDice::Input.new one_ring, 'foobar'
 
 puts ddice.cleartext.inspect
 puts
-puts ddice.matrix.to_a.map(&:inspect)
+puts ddice.matrix
 
 shifter = DoubleDice::Shifter.new(ddice.matrix)
 puts
