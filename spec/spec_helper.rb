@@ -3,3 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'double_dice'
 require 'minitest/autorun'
+
+def context(*args, &block)
+  describe(*args, &block)
+end
