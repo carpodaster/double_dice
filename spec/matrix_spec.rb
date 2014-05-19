@@ -38,8 +38,6 @@ describe DoubleDice::Matrix do
       subject   = DoubleDice::Matrix.new cleartext, password
 
       expected  = [
-        password,
-        password_index_line(password), # TODO remove me
         %w(H E L L O),
         %w(W O R L D)
       ]
@@ -52,12 +50,27 @@ describe DoubleDice::Matrix do
       subject   = DoubleDice::Matrix.new cleartext, password
 
       expected  = [
-        password,
-        password_index_line(password), # TODO remove me
         %w(H E L L O W),
         %w(O R L D _ _)
       ]
       subject.to_a.must_equal expected
+    end
+
+  end
+
+  describe '#to_s' do
+    it 'returns the arranged cleartext with password and index line header rows' do
+      cleartext = %w(H E L L O W O R L D)
+      password  = %w(F O O B A R)
+      subject   = DoubleDice::Matrix.new cleartext, password
+
+      expected  = [
+        password,
+        password_index_line(password),
+        %w(H E L L O W),
+        %w(O R L D _ _)
+      ].map(&:inspect)
+      subject.to_s.must_equal expected
     end
 
     def password_index_line(password)

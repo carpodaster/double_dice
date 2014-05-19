@@ -11,10 +11,7 @@ class DoubleDice
     end
 
     def to_a
-      matrix = [password]
-      matrix << index_line
-
-      line = []
+      matrix, line = [], []
       cleartext.each do |char|
         if line.size < password.size
           line << char
@@ -26,6 +23,13 @@ class DoubleDice
       last_line = fill_last_line(line)
       matrix << last_line unless last_line.empty?
       matrix
+    end
+
+    def to_s
+      matrix = to_a
+      matrix.unshift index_line
+      matrix.unshift Array(password)
+      matrix.map(&:inspect)
     end
 
     private
