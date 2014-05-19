@@ -1,5 +1,14 @@
 class DoubleDice
-  class Matrix < Struct.new(:cleartext, :password)
+  class Matrix
+
+    attr_reader :cleartext, :password
+
+    def initialize(cleartext, password)
+      unless [cleartext, password].all? { |arg| arg.kind_of? Array }
+        raise ArgumentError.new('Provided argument is not an Array')
+      end
+      @cleartext, @password = cleartext, password
+    end
 
     def to_a
       matrix = [password]

@@ -3,11 +3,31 @@ require 'spec_helper'
 describe DoubleDice::Matrix do
   describe 'its constructor' do
     it 'sets cleartext and password without sanitizing them' do
-      cleartext, password = 'foo', 'bar'
+      cleartext, password = 'foo'.split(//), 'bar'.split(//)
       subject = DoubleDice::Matrix.new cleartext, password
 
       subject.cleartext.must_equal cleartext
       subject.password.must_equal password
+    end
+
+    it 'requires cleartext to be an array' do
+      cleartext, password = 'foo', 'bar'.split(//)
+      instantiate_matrix_and_rescue cleartext, password
+    end
+
+    it 'requires password to be an array' do
+      cleartext, password = 'foo'.split(//), 'bar'
+      instantiate_matrix_and_rescue cleartext, password
+    end
+
+    # Shared example for constructor parameter check
+    def instantiate_matrix_and_rescue(*args)
+      begin
+        DoubleDice::Matrix.new(*args)
+        refute true, 'Exception must be raised'
+      rescue => e
+        e.must_be_instance_of ArgumentError
+      end
     end
   end
 
