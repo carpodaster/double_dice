@@ -78,4 +78,10 @@ describe DoubleDice::Matrix do
     end
   end
 
+  describe '#sort' do
+    it 'rearranges columns' do
+      skip
+    end
+  end
+
 end
