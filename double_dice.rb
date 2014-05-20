@@ -5,7 +5,14 @@ module DoubleDice
 
   class PasswordVector < Struct.new(:password)
     def to_a
-      password.map{|char| ('A'..'Z').to_a.index(char) }.map(&:to_s)
+      password.map{|char| ('A'..'Z').to_a.index(char.upcase) }.map(&:to_i)
+    end
+
+    def to_hash
+      to_a.inject({}) do |hash, pos|
+        hash[to_a.index(pos)] = to_a.sort.index(pos)
+        hash
+      end
     end
   end
 
