@@ -78,12 +78,12 @@ EOMIDDLEEARTH
 
 # ddice = DoubleDice.new text, pass
 # ddice = DoubleDice.new slipsum, 'foobar'
-ddice = DoubleDice::Input.new one_ring, 'foobar'
+ddice = DoubleDice::Input.new one_ring, 'foubar'
 
 puts ddice.cleartext.inspect
 puts
 puts ddice.matrix
 
-shifter = DoubleDice::Shifter.new(ddice.matrix)
+shifted1 = ddice.matrix.sort
 puts
-puts shifter.to_a.map(&:inspect)
+puts shifted1.to_a.map(&:inspect)
