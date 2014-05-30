@@ -80,7 +80,18 @@ describe DoubleDice::Matrix do
 
   describe '#sort' do
     it 'rearranges columns' do
-      skip
+      cleartext = %w(H E L L O W O R L D)
+      password  = %w(F U B A R)
+      subject   = DoubleDice::Matrix.new cleartext, password
+
+      # %w(H E L L O),
+      # %w(W O R L D)
+
+      expected  = [
+        %w(L L H O E),
+        %w(L R W D O)
+      ]
+      subject.sort.must_equal expected
     end
   end
 

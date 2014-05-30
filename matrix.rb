@@ -10,6 +10,11 @@ module DoubleDice
       @cleartext, @password = cleartext, password
     end
 
+    # Reorders the columns based on the set password
+    def sort
+      to_a.map { |line| vector.transform(line) }
+    end
+
     def to_a
       matrix, line = [], []
       cleartext.each do |char|
@@ -41,8 +46,12 @@ module DoubleDice
       line
     end
 
+    def vector
+      @vector ||= PasswordVector.new(password)
+    end
+
     def index_line
-      PasswordVector.new(password).to_a
+      vector.to_a
     end
   end
 end
