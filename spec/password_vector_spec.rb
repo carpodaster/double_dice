@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe DoubleDice::PasswordVector do
 
+  describe '#size' do
+    it 'returns the length of the password' do
+      password = %w(A B C)
+      subject  = described_class.new password
+
+      subject.size.must_equal 3
+    end
+  end
+
   describe '#to_a' do
     it 'returns a list of alphabet indices' do
       password = %w(A B C)

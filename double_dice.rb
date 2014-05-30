@@ -4,6 +4,10 @@ require 'matrix'
 module DoubleDice
 
   class PasswordVector < Struct.new(:password)
+    def size
+      to_a.size
+    end
+
     def to_a
       password.map{|char| ('A'..'Z').to_a.index(char.to_s.upcase) }.map(&:to_i)
     end
