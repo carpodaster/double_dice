@@ -27,6 +27,30 @@ describe DoubleDice::PasswordVector do
     end
   end
 
+  describe '#transform' do
+    it 'returns a sorted list' do
+      password = %w(F U B A R)
+      subject  = described_class.new password
+
+      input  = %w(H E L L O)
+      output = %w(L L H O E)
+
+      subject.transform(input).must_equal output
+    end
+
+    it 'handles errors with input array not matching its length' do
+      password = %w(F U B A R)
+      subject  = described_class.new password
+
+      begin
+        subject.transform ('A'..'Z').to_a
+        refute true, 'Exception must be raised'
+      rescue => e
+        e.must_be_instance_of ArgumentError
+      end
+    end
+  end
+
   describe '#to_hash' do
     context 'with password input already sorted' do
       it 'maps character position to its supposed sorted position' do

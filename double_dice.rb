@@ -18,6 +18,16 @@ module DoubleDice
         hash
       end
     end
+
+    def transform(array)
+      if array.size != size
+        message = "Illegal input length #{array.size} for #{size}"
+        raise ArgumentError.new(message)
+      end
+      transformed = Array.new(size)
+      to_hash.each { |from, to| transformed[to] = array[from] }
+      transformed
+    end
   end
 
   class Shifter < Struct.new(:matrix)
