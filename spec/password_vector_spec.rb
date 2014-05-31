@@ -51,14 +51,14 @@ describe DoubleDice::PasswordVector do
     end
   end
 
-  describe '#to_hash' do
+  describe '#instructor' do
     context 'with password input already sorted' do
       it 'maps character position to its supposed sorted position' do
         password = %w(A B C)
         subject  = described_class.new password
 
-        expected = { 0 => 0, 1 => 1, 2 => 2 }
-        subject.to_hash.must_equal expected
+        expected = [ [0, 0], [1, 1], [2, 2] ]
+        subject.instructor.must_equal expected
       end
     end
 
@@ -67,16 +67,16 @@ describe DoubleDice::PasswordVector do
         password = %w(F U B A R)
         subject  = described_class.new password
 
-        expected = { 0 => 2, 1 => 4, 2 => 1, 3 => 0, 4 => 3 }
-        subject.to_hash.must_equal expected
+        expected = [ [0, 2], [1, 4], [2, 1], [3, 0], [4, 3] ]
+        subject.instructor.must_equal expected
       end
 
       it 'handles characters that occur twice' do
         password = %w(F O O B A R)
         subject  = described_class.new password
 
-        skip 'Index of O will be overwritten in resulting hash, resulting hash will miss one element'
-        subject.to_hash.must_equal expected
+        expected = [ [0, 2], [1, 3], [2, 4], [3, 1], [4, 0], [5, 5 ] ]
+        subject.instructor.must_equal expected
       end
     end
   end

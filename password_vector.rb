@@ -8,11 +8,18 @@ module DoubleDice
       password.map{|char| ('A'..'Z').to_a.index(char.to_s.upcase) }.map(&:to_i)
     end
 
-    def to_hash
-      to_a.inject({}) do |hash, pos|
-        hash[to_a.index(pos)] = to_a.sort.index(pos)
-        hash
+    def instructor
+      sorted, target_map = to_a.sort, Array.new(size)
+      to_a.each_with_index do |char_pos, index|
+        origin_pos = to_a.index(char_pos)
+        target_pos = sorted.index(char_pos)
+        if target_map[index-1] == [origin_pos, target_pos]
+          origin_pos += 1
+          target_pos += 1
+        end
+        target_map[index] = [origin_pos, target_pos]
       end
+      target_map
     end
 
     def transform(array)
@@ -21,7 +28,7 @@ module DoubleDice
         raise ArgumentError.new(message)
       end
       transformed = Array.new(size)
-      to_hash.each { |from, to| transformed[to] = array[from] }
+      instructor.each { |from, to| transformed[to] = array[from] }
       transformed
     end
   end
