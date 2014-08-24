@@ -78,6 +78,14 @@ describe DoubleDice::PasswordVector do
         expected = [ [0, 2], [1, 3], [2, 4], [3, 1], [4, 0], [5, 5 ] ]
         subject.instructor.must_equal expected
       end
+
+      it 'handles characters that occur more than twice' do
+        password = %w(N O T E B O O K)
+        subject  = described_class.new password
+
+        expected = [ [0, 3], [1, 4], [2, 7], [3, 1], [4, 0], [5, 5], [6, 6], [7, 2] ]
+        subject.instructor.must_equal expected
+      end
     end
   end
 

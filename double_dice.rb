@@ -53,6 +53,8 @@ EOMIDDLEEARTH
 # ddice = DoubleDice.new text, pass
 # ddice = DoubleDice.new slipsum, 'foobar'
 ddice = DoubleDice::Input.new one_ring, 'foubar'
+lint = 'HALLODASHIERISTEINLANGERBEISPIELTEXTUMDASVERFAHRENZUZEIGEN'
+ddice = DoubleDice::Input.new lint, 'NOTEBOOK'
 
 puts ddice.cleartext.inspect
 puts

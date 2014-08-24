@@ -9,14 +9,10 @@ module DoubleDice
     end
 
     def instructor
-      sorted, target_map = to_a.sort, Array.new(size)
+      target_map = Array.new(size)
       to_a.each_with_index do |char_pos, index|
-        origin_pos = to_a.index(char_pos)
-        target_pos = sorted.index(char_pos)
-        if target_map[index-1] == [origin_pos, target_pos]
-          origin_pos += 1
-          target_pos += 1
-        end
+        origin_pos = origin_position_respecting_duplicates(target_map, char_pos)
+        target_pos = target_position_respecting_duplicates(target_map, char_pos)
         target_map[index] = [origin_pos, target_pos]
       end
       target_map
@@ -31,5 +27,20 @@ module DoubleDice
       instructor.each { |from, to| transformed[to] = array[from] }
       transformed
     end
+
+    private
+
+    def origin_position_respecting_duplicates(target_map, char_pos)
+      target_map_size = target_map.compact.size
+      last_pos = to_a[0..target_map_size].rindex(char_pos)
+      last_pos + to_a[last_pos..-1].index(char_pos)
+    end
+
+    def target_position_respecting_duplicates(target_map, char_pos)
+      target_map_size = target_map.compact.size
+      occurences = to_a[0..target_map_size].select{|pos| pos == char_pos}.count
+      to_a.sort.index(char_pos) + occurences - 1 #if occurences > 1
+    end
+
   end
 end
