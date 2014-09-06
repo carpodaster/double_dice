@@ -9,7 +9,7 @@ module DoubleDice
     matrix1 = DoubleDice::Input.new(message, password1).matrix.sort
     shifter = Shifter.new matrix1
 
-    matrix2 = DoubleDice::Input.new(shifter.to_s, password2).matrix.sort
+    matrix2 = DoubleDice::Input.new(shifter, password2).matrix.sort
     Shifter.new(matrix2).to_s
   end
 

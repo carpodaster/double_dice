@@ -23,6 +23,11 @@ describe DoubleDice::Input do
 
         subject.cleartext.must_equal %w(F B R)
       end
+
+      it 'converts cleartext to string' do
+        subject = described_class.new nil, ''
+        subject.cleartext.must_equal []
+      end
     end
 
     context 'setting the password' do
@@ -45,6 +50,11 @@ describe DoubleDice::Input do
         subject = described_class.new '', password
 
         subject.password.must_equal %w(F 0 0 B _ R)
+      end
+
+      it 'converts password to string' do
+        subject = described_class.new '', nil
+        subject.password.must_equal []
       end
     end
   end
