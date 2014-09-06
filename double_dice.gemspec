@@ -6,7 +6,7 @@ require "double_dice/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "double_dice"
-  s.version     = DoubeDice::VERSION
+  s.version     = DoubleDice::VERSION
   s.authors     = ["Carsten Zimmermann"]
   s.email       = ["cz@aegisnet.de"]
   s.homepage    = "https://github.com/carpodaster/double_dice"
