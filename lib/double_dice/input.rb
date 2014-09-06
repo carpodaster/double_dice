@@ -9,7 +9,7 @@ module DoubleDice
     end
 
     def matrix
-      DoubleDice::Matrix.new(cleartext, password)
+      @matrix ||= DoubleDice::Matrix.new(cleartext, password)
     end
   end
 end
