@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Ruby interface for the 'Double Dice' encryption algorithm"
   s.description = "Ruby interface for the 'Double Dice' encryption algorithm"
   s.license     = "ISC/BSD-style"
+  s.required_ruby_version = '>= 2.0.0'
 
   s.files = Dir["{lib}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
 end
