@@ -3,7 +3,7 @@ module DoubleDice
 
     attr_reader :cleartext, :password
 
-    def initialize(cleartext, password)
+    def initialize(cleartext: cleartext, password: password)
       @cleartext = cleartext.to_s.upcase.strip.split(//).select{|c| /[A-Z]/ =~ c}
       @password  = password.to_s.upcase.strip.gsub(/\s/, '').split(//)
     end
