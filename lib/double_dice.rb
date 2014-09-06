@@ -1,6 +1,5 @@
-$:.unshift '.'
-require 'matrix'
-require 'password_vector'
+require 'double_dice/matrix'
+require 'double_dice/password_vector'
 
 module DoubleDice
 
