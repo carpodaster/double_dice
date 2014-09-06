@@ -1,6 +1,7 @@
 require 'double_dice/matrix'
 require 'double_dice/password_vector'
 require 'double_dice/shifter'
+require 'double_dice/input'
 
 module DoubleDice
 
@@ -11,20 +12,7 @@ module DoubleDice
     matrix2 = DoubleDice::Input.new(shifter.to_s, password2).matrix.sort
     Shifter.new(matrix2).to_s
   end
+
   module_function :encrypt
 
-  class Input # TODO rename me
-
-    attr_reader :cleartext, :password
-
-    def initialize(cleartext, password)
-      @cleartext = cleartext.upcase.strip.split(//).select{|c| /[A-Z]/ =~ c}
-      @password  = password.upcase.strip.gsub(/\s/, '').split(//)
-    end
-
-    def matrix
-      DoubleDice::Matrix.new(cleartext, password)
-    end
-  end
 end
-
